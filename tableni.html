@@ -7,19 +7,19 @@
         <link rel="stylesheet" href="../normalize.css">
 <link rel="stylesheet" href="../styles.css">
         <style> 
-            /* table  {
+            table  {
             display: table;border-collapse: separate; box-sizing: border-box; border-spacing: 2px;
             border-color: grey;
             margin-left:30rem;
             font-weight: bolder;
             font-size: 20px; 
             height: 2rem;  
-             } */
+             }
         </style>    
         <script>
 // Get the tbody and insert a new row () params
-function addRow (tbodyid,cells) {
-    const tbody=document.getElementById(tbodyid)
+function addRow (tbodyId,cells) {
+    const tbody=document.getElementById(tbodyId)
     const newRow=tbody.insertRow();
 // Insert cells based on passed-in cells array
     let newCell;
@@ -27,7 +27,22 @@ function addRow (tbodyid,cells) {
         newCell=newRow.insertCell();
         newCell.innerHTML=cells[i];
     }
+    // Insert a final cell with a Delete button
+    newCell=newRow.insertCell();
+    const btnDelete=document.createElement('button');
+    btnDelete.innerHTML="X";
+    btnDelete.addEventListener('click',function(e){
+        btnDelete.parentNode.parentNode.remove()
+    })
+    newCell.appendChild(btnDelete)
 }
+
+function deleteAllRows (tbodyId) {
+    const tbody = document.getElementById(tbodyId);
+       while (tbody.rows.length>0) {
+        tbody.deleteRow(0)
+       }
+   }
 //Create a cells array to pass to the 
  function prepareCells(fName, lName) {
      let cells=[fName.value,lName.value];
@@ -41,14 +56,22 @@ window.addEventListener('load', function() {
 const fName = document.getElementById('firstname');
 const lName = document.getElementById('lastname');
 const btnAdd = document.getElementById("btn-add");
+const btnDeleteAll=document.getElementById("btn-delete-all");
+
 btnAdd.addEventListener('click', function() {
     prepareCells(fName, lName);
     });
+
     lName.addEventListener('keypress',function(e) {
     if(e.key==="Enter") {
     prepareCells(fName,lName)
-    }
-})
+      }
+    })
+
+    btnDeleteAll.addEventListener('click', function() {
+    deleteAllRows('people');
+  });
+    fName.focus();
  })
 
 
