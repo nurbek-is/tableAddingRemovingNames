@@ -8,10 +8,7 @@
 <link rel="stylesheet" href="../styles.css">
         <style> 
             /* table  {
-            display: table;
-            border-collapse: separate;
-            box-sizing: border-box;
-            border-spacing: 2px;
+            display: table;border-collapse: separate; box-sizing: border-box; border-spacing: 2px;
             border-color: grey;
             margin-left:30rem;
             font-weight: bolder;
@@ -31,9 +28,6 @@ function addRow (tbodyid,cells) {
         newCell.innerHTML=cells[i];
     }
 }
-
-// Insert a final cell with a Delete button
-// function deleteAllRows(tbodyId)
 //Create a cells array to pass to the 
  function prepareCells(fName, lName) {
      let cells=[fName.value,lName.value];
@@ -49,9 +43,15 @@ const lName = document.getElementById('lastname');
 const btnAdd = document.getElementById("btn-add");
 btnAdd.addEventListener('click', function() {
     prepareCells(fName, lName);
-  });
-
+    });
+    lName.addEventListener('keypress',function(e) {
+    if(e.key==="Enter") {
+    prepareCells(fName,lName)
+    }
+})
  })
+
+
 
         </script>
     </header>
@@ -85,5 +85,4 @@ btnAdd.addEventListener('click', function() {
 </table>
 </main>
 </body>
-
 </html>
